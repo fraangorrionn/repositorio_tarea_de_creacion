@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas Completadas</title>
+    <style>
+        /* Agrega estilos básicos */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .tarea {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Tareas Completadas</h1>
+    </header>
+
+    <div class="container">
+        <h2>Tareas Completadas entre {{ 2000 }} y {{ 2024 }}:</h2>
+        {% if tareas %}
+            {% for tarea in tareas %}
+                <div class="tarea">
+                    <strong>Título:</strong> {{ tarea.titulo }}<br>
+                    <strong>Descripción:</strong> {{ tarea.descripcion }}<br>
+                    <strong>Fecha de Creación:</strong> {{ tarea.fecha_creacion }}<br>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay tareas completadas en este rango de años.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
