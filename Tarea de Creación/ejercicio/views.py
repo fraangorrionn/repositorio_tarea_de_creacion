@@ -1,41 +1,74 @@
 from django.shortcuts import render
+from django.db.models import F
 from .models import (
     Usuario,Proyecto,Tarea,
     AsignacionTarea,Etiqueta,Comentario
 )
 
-# Create your views here.
+
 def index(request):
     return render(request, 'index.html') 
 
-#Una url que me muestre información sobre cada Proyectos
 def dame_proyecto(request):
     proyecto = Proyecto.objects.select_related("creador").prefetch_related("colaboradores")
     proyecto = proyecto.all()
 
     return render(request, 'Proyecto/proyecto.html',{"dame_proyecto":proyecto})
 
-# Obtener las tareas asociadas al proyecto, ordenadas por fecha de creación descendente
 def tareas_por_proyecto(request, proyecto_id):
-    tareas = Tarea.objects.filter(proyecto=proyecto_id).select_related("proyecto").order_by('-fecha_creacion')
+    tareas = Tarea.objects.filter(proyecto=proyecto_id).select_related("proyecto").order_by('-fecha_creacion').all()
     return render(request, 'Proyecto/tarea_por_proyecto.html', {'tareas': tareas})
 
-#Obtener todos los usuarios que están asignados a una tarea ordenados por la fecha de asignación de la tarea de forma ascendente
 def asignacion_tarea(request, tarea_id):
-    asignaciontarea = AsignacionTarea.objects.filter(tarea = tarea_id).select_related("usuario").select_related("tarea").order_by('fecha_asignacion')
+    asignaciontarea = AsignacionTarea.objects.filter(tarea = tarea_id).select_related("usuario").select_related("tarea").order_by('fecha_asignacion').all()
     return render(request, 'Asignacion/asignacion_tarea.html', {'asignaciontarea': asignaciontarea})
 
-# Función que obtiene las asignaciones de tareas que contienen un texto en las observaciones
-def texto_observaciones(request, texto_observaciones):
-    asignaciontarea = AsignacionTarea.objects.filter(observaciones__icontains=texto_observaciones).select_related("tarea")
+def texto_observaciones(request,texto_observaciones):
+    asignaciontarea = AsignacionTarea.objects.filter(observaciones__icontains = texto_observaciones).select_related("tarea").select_related("usuario").all()
     return render(request, 'Asignacion/texto_observacion.html', {'asignaciontarea': asignaciontarea})
 
-def tareas_completadas(request, ano1, ano2):
+def tareas_completadas(request,fecha_inicio,fecha_final):
+    tareas = Tarea.objects.filter(estado = "Co",
+                                 fecha_creacion__year__gte = fecha_inicio,
+                                 fecha_creacion__year__lte = fecha_final).select_related("proyecto").all()
+    return render(request, 'Tarea/tareas_completadas.html', {'tareas': tareas})
 
-    tareas = Tarea.objects.filter(
-        estado='Completada',  # 'Co' es el código para Completada
-        fecha_creacion__year__gte=ano1,
-        fecha_creacion__year__lte=ano2
-    ).order_by('-fecha_creacion')
+def usuario_comentario(request,proyecto_id):
+    usuario = usuario.filter(comentarios_creador__tarea__proyecto=proyecto_id).order_by("-comentarios_creador__fecha_comentario")[:1].get()
+
+    return render(request, 'usuario/usuario_comentario.html', {'usuario': usuario})
+
+def comentarios_palabra_y_ano(request, tarea_id, palabra, ano):
+    comentarios = Comentario.objects.filter(
+        tarea_id = tarea_id,
+        contenido__istartswith=palabra,
+        fecha_comentario__year=ano
+    ).select_related("autor").all()
     
-    return render(request, 'tareas_completadas.html', {'tareas': tareas})
+    return render(request, 'Comentario/comentarios_palabra_y_ano.html', {'comentarios': comentarios})
+
+def etiquetas_por_proyecto(request, proyecto_id):
+    etiquetas = Etiqueta.objects.filter(
+        tarea__proyecto_id=proyecto_id
+    ).distinct()
+    
+    return render(request, 'Etiqueta/etiquetas_por_proyecto.html', {'etiquetas': etiquetas})
+
+def usuarios_no_asignados(request):
+    usuarios = Usuario.objects.exclude(colaboradores_tarea__isnull=False).all()
+    return render(request, 'usuario/usuarios_no_asignados.html', {'usuarios': usuarios})
+
+
+from django.shortcuts import render
+
+def handler_404(request, exception):
+    return render(request, '404.html', status=404)
+
+def handler_500(request):
+    return render(request, '500.html', status=500)
+
+def handler_403(request, exception):
+    return render(request, '403.html', status=403)
+
+def handler_400(request, exception):
+    return render(request, '400.html', status=400)
