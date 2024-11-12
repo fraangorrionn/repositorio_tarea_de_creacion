@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Proyectos</title>
+</head>
+<body>
+
+    <header>
+        <a href="/">Sistema de Proyectos</a>
+    </header>
+
+    <div class="container">
+        <h1>Listado de Proyectos</h1>
+        {% for proyectoo in dame_proyecto %}
+        <article>
+            <h2>Proyecto</h2>
+            <p><strong>Nombre:</strong> {{ proyectoo.nombre }}</p>
+            <p><strong>Descripcion:</strong> {{ proyectoo.descripcion }}</p>
+            <p><strong>Duracion:</strong> {{ proyectoo.duracion }}</p>
+            <p><strong>Fecha comienzo:</strong> {{ proyectoo.fecha_inicio }}</p>
+            <p><strong>fecha final:</strong> {{ proyectoo.fecha_fin }}</p>
+            <p><strong>Creador:</strong> {{ proyectoo.creador }}</p>
+            <p><strong>Colaborador:</strong> {{ proyectoo.colaboradores }}</p>
+
+            <ul>
+                {% for colaborador in proyecto.colaboradores.all %}
+                    <li>{{ colaborador.nombre }}</li>
+                {% endfor %}
+            </ul>
+        </article>
+        {% endfor %}
+        <div class="refresh">
+            <a href="{% url 'dame_proyecto' %}">Refrescar la Lista</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 - proyectos
+    </footer>
+
+</body>
+</html>

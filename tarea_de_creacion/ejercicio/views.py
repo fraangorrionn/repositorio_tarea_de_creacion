@@ -34,7 +34,7 @@ def tareas_completadas(request,fecha_inicio,fecha_final):
     return render(request, 'Tarea/tareas_completadas.html', {'tareas': tareas})
 
 def usuario_comentario(request,proyecto_id):
-    usuario = usuario.filter(comentarios_creador__tarea__proyecto=proyecto_id).order_by("-comentarios_creador__fecha_comentario")[:1].get()
+    usuario = Usuario.objects.filter(comentarios_creador__tarea__proyecto=proyecto_id).order_by("-comentarios_creador__fecha_comentario")[:1].get()
 
     return render(request, 'usuario/usuario_comentario.html', {'usuario': usuario})
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Proyectos</title>
+</head>
+<body>
+
+    <header>
+        <a href="/">Sistema de Proyectos</a>
+    </header>
+
+    <div class="container">
+        <h1>Listado de Proyectos</h1>
+        {% for proyecto in proyectos %}
+        <article>
+            <h2>Proyecto</h2>
+            <p><strong>Nombre:</strong> {{ proyecto.nombre }}</p>
+            <p><strong>Descripcion:</strong> {{ proyecto.descripcion }}</p>
+            <p><strong>Duracion:</strong> {{ proyecto.duracion }}</p>
+            <p><strong>Fecha comienzo:</strong> {{ proyecto.fecha_inicio }}</p>
+            <p><strong>fecha final:</strong> {{ proyecto.fecha_fin }}</p>
+            <p><strong>Creador:</strong> {{ proyecto.creador }}</p>
+            <p><strong>Colaboradores:</strong> 
+                {% for colaborador in proyecto.colaboradores.all %}
+                    {{ colaborador.nombre }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        </article>
+        {% endfor %}
+    </div>
+
+    <footer>
+        &copy; 2024 - proyectos
+    </footer>
+
+</body>
+</html>
