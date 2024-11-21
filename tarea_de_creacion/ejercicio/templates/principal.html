@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block cabecera %}Sistema de Gestión de Ejercicio{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/principal.css' %}"> <!-- Archivo CSS -->
+</head>
+
+<body>
+
+    <!-- Incluir menú de navegación -->
+    {% include 'estructura/menu.html' %}
+
+    <!-- Imagen de ejemplo -->
+    <div class="image-container">
+        <img src="{% static 'imagenes/mclovin.jpg' %}" alt="Descripción de la imagen">
+    </div>
+
+    <!-- Contenido principal -->
+    <main>
+        {% block contenido %}
+        <!-- Aquí irá el contenido específico de cada página que herede de esta plantilla -->
+        {% endblock %}
+    </main>
+
+    <!-- Incluir pie de página -->
+    {% include 'estructura/pie.html' %}
+
+    <!-- Archivo JavaScript -->
+    <script src="{% static 'javascript/script.js' %}"></script>
+
+</body>
+</html>

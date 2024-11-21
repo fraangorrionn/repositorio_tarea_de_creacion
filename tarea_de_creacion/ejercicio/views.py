@@ -72,3 +72,8 @@ def handler_403(request, exception):
 
 def handler_400(request, exception):
     return render(request, '400.html', status=400)
+
+context = {
+    "numero1": 15,
+    "numero2": 10,
+}

@@ -1,0 +1,7 @@
+{% for colaborador in colaboradores %}
+    {{ colaborador.nombre }}{% if not forloop.last %}, {% endif %}
+{% endfor %}
+
+{% for colaborador in colaboradores %}
+    <li>{{ colaborador.nombre }}</li>
+{% endfor %}

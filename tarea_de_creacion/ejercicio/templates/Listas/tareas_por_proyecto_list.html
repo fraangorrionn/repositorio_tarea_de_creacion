@@ -1,0 +1,8 @@
+<article>
+    <h3>Título: {{ tarea.titulo|capfirst }}</h3> <!-- Filtro capfirst -->
+    <p><strong>Proyecto:</strong> {{ tarea.proyecto.id|default:"Proyecto no asignado" }}</p> <!-- Filtro default -->
+    <p><strong>Descripción:</strong> {{ tarea.descripcion|truncatewords:15 }}</p> <!-- Filtro truncatewords -->
+    <p><strong>Prioridad:</strong> {{ tarea.prioridad|yesno:"Alta,Media,Baja" }}</p> <!-- Filtro yesno -->
+    <p><strong>Estado:</strong> {{ tarea.estado|upper }}</p> <!-- Filtro upper -->
+    <p><strong>Fecha de Creación:</strong> {{ tarea.fecha_creacion|date:"d-m-Y" }}</p> <!-- Filtro date -->
+</article>

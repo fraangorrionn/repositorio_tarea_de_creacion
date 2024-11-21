@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asignaciones de Tareas</title>
-</head>
-<body>
+{% extends 'principal.html' %}
 
+{% block cabecera %}
+    <title>Asignaciones de Tareas</title>
+{% endblock %}
+
+{% block contenido %}
     <header>
         <h1>Asignaciones de Tareas</h1>
     </header>
@@ -15,17 +13,10 @@
         <h2>Tareas Asignadas:</h2>
         <ul>
             {% for asignacion in asignaciontarea %}
-            <strong>Proyecto:</strong> {{ asignacion.proyecto.id }}<br>
-                <li>
-                    <strong>Usuario:</strong> {{ asignacion.usuario.nombre }}<br>
-                    <strong>Tarea:</strong> {{ asignacion.tarea.titulo }}<br>
-                    <strong>Fecha de Asignación:</strong> {{ asignacion.fecha_asignacion }}<br>
-                </li>
+                {% include 'Listas/asignacion_tarea_list.html' %}
             {% empty %}
                 <li>No hay asignaciones para esta tarea.</li>
             {% endfor %}
         </ul>
     </div>
-
-</body>
-</html>
+{% endblock %}

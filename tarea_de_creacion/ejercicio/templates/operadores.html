@@ -1,0 +1,49 @@
+{% extends "principal.html" %}
+{% block contenido %}
+<div class="container">
+    <h1>Operadores en acción</h1>
+
+    <!-- Operador de comparación -->
+    {% if numero1 > numero2 %}
+        <p>{{ numero1 }} es mayor que {{ numero2 }}</p>
+    {% else %}
+        <p>{{ numero1 }} no es mayor que {{ numero2 }}</p>
+    {% endif %}
+
+    <!-- Operador de igualdad -->
+    {% if numero1 == numero2 %}
+        <p>{{ numero1 }} es igual a {{ numero2 }}</p>
+    {% else %}
+        <p>{{ numero1 }} no es igual a {{ numero2 }}</p>
+    {% endif %}
+
+    <!-- Operador de desigualdad -->
+    {% if numero1 != numero2 %}
+        <p>{{ numero1 }} es diferente de {{ numero2 }}</p>
+    {% endif %}
+
+    <!-- Operador lógico (AND) -->
+    {% if numero1 > 0 and numero2 > 0 %}
+        <p>Ambos números son positivos</p>
+    {% else %}
+        <p>Uno o ambos números no son positivos</p>
+    {% endif %}
+
+    <!-- Operador lógico (OR) -->
+    {% if numero1 < 0 or numero2 < 0 %}
+        <p>Al menos uno de los números es negativo</p>
+    {% else %}
+        <p>Ninguno de los números es negativo</p>
+    {% endif %}
+
+    <!-- Operador aritmético -->
+    <p>La suma de {{ numero1 }} y {{ numero2 }} es {{ numero1|add:numero2 }}</p>
+
+    <!-- Operador de módulo (divisibleby) -->
+    {% if numero1|divisibleby:2 %}
+        <p>{{ numero1 }} es divisible por 2</p>
+    {% else %}
+        <p>{{ numero1 }} no es divisible por 2</p>
+    {% endif %}
+</div>
+{% endblock %}

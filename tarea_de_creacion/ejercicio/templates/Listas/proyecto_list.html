@@ -1,0 +1,14 @@
+<article>
+    <h2>Proyecto</h2>
+    <p><strong>Nombre:</strong> {{ proyectoo.nombre }}</p>
+    <p><strong>Descripción:</strong> {{ proyectoo.descripcion }}</p>
+    <p><strong>Duración:</strong> {{ proyectoo.duracion }}</p>
+    <p><strong>Fecha de comienzo:</strong> {{ proyectoo.fecha_inicio }}</p>
+    <p><strong>Fecha final:</strong> {{ proyectoo.fecha_fin }}</p>
+    <p><strong>Creador:</strong> {{ proyectoo.creador }}</p>
+    <p><strong>Colaborador:</strong> {{ proyectoo.colaboradores }}</p>
+
+    <ul>
+        {% include 'Listas/colaborador_list.html' with colaboradores=proyectoo.colaboradores.all %}
+    </ul>
+</article>

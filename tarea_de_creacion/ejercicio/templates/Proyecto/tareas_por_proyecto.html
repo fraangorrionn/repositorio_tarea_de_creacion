@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tareas del Proyecto</title>
-</head>
-<body>
+{% extends 'principal.html' %}
 
+{% block cabecera %}
+    <title>Tareas del Proyecto</title>
+{% endblock %}
+
+{% block contenido %}
     <header>
         <a href="/">Sistema de Proyectos</a>
     </header>
@@ -25,10 +23,4 @@
             {% endfor %}
         </ul>
     </div>
-
-    <footer>
-        &copy; 2024 - Sistema de Proyectos
-    </footer>
-
-</body>
-</html>
+{% endblock %}

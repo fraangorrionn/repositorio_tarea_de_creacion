@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comentarios de la Tarea</title>
-</head>
-<body>
+{% extends 'principal.html' %}
 
+{% block cabecera %}
+    <title>Comentarios de la Tarea</title>
+{% endblock %}
+
+{% block contenido %}
     <header>
         <a href="/">Sistema de Proyectos</a>
     </header>
@@ -16,20 +14,10 @@
         
         {% if comentarios %}
             {% for comentario in comentarios %}
-            <article>
-                <p><strong>Contenido:</strong> {{ comentario.contenido }}</p>
-                <p><strong>Fecha del comentario:</strong> {{ comentario.fecha_comentario }}</p>
-                <p><strong>Autor:</strong> {{ comentario.autor.nombre }}</p>
-            </article>
+                {% include 'Listas/comentarios_list.html' %}
             {% endfor %}
         {% else %}
             <p>No hay comentarios que coincidan con los criterios especificados.</p>
         {% endif %}
     </div>
-
-    <footer>
-        &copy; 2024 - Sistema de Proyectos
-    </footer>
-
-</body>
-</html>
+{% endblock %}

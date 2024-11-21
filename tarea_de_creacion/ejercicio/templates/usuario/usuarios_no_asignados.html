@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios No Asignados</title>
-</head>
-<body>
+{% extends 'principal.html' %}
 
+{% block cabecera %}
+    <title>Usuarios No Asignados</title>
+{% endblock %}
+
+{% block contenido %}
     <header>
         <a href="/">Sistema de Proyectos</a>
     </header>
@@ -17,13 +15,12 @@
         {% if usuarios %}
             <ul>
                 {% for usuario in usuarios %}
-                <li>{{ usuario.nombre }} - {{ usuario.email }}</li>
+                    {% include 'Listas/usuario_no_asignado_list.html' %}
                 {% endfor %}
             </ul>
         {% else %}
             <p>No hay usuarios sin tareas asignadas.</p>
         {% endif %}
     </div>
+{% endblock %}
 
-</body>
-</html>

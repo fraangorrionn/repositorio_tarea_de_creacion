@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
+{% extends 'principal.html' %}
+
+{% block cabecera %}
     <title>Solicitud Incorrecta</title>
-</head>
-<body>
+{% endblock %}
+
+{% block contenido %}
     <h1>Error 400: Solicitud Incorrecta</h1>
     <p>La solicitud que hiciste no es válida.</p>
     <a href="/">Volver a la Página Principal</a>
-</body>
-</html>
+{% endblock %}

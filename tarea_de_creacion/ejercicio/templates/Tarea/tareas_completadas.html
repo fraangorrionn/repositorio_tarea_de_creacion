@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tareas Completadas</title>
-</head>
-<body>
+{% extends 'principal.html' %}
 
+{% block cabecera %}
+    <title>Tareas Completadas</title>
+{% endblock %}
+
+{% block contenido %}
     <header>
         <h1>Tareas Completadas</h1>
     </header>
@@ -15,16 +13,10 @@
         <h2>Tareas Completadas entre {{ 2000 }} y {{ 2024 }}:</h2>
         {% if tareas %}
             {% for tarea in tareas %}
-                <div class="tarea">
-                    <strong>Título:</strong> {{ tarea.titulo }}<br>
-                    <strong>Descripción:</strong> {{ tarea.descripcion }}<br>
-                    <strong>Fecha de Creación:</strong> {{ tarea.fecha_creacion }}<br>
-                </div>
+                {% include 'Listas/tareas_completadas_list.html' %}
             {% endfor %}
         {% else %}
             <p>No hay tareas completadas en este rango de años.</p>
         {% endif %}
     </div>
-
-</body>
-</html>
+{% endblock %}

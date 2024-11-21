@@ -1,0 +1,12 @@
+<article>
+    <h2>Proyecto</h2>
+    <p><strong>Nombre:</strong> {{ proyecto.nombre|upper }}</p> <!-- Filtro upper -->
+    <p><strong>Descripción:</strong> {{ proyecto.descripcion|truncatechars:100 }}</p> <!-- Filtro truncatechars -->
+    <p><strong>Duración:</strong> {{ proyecto.duracion|default:"Duración no especificada" }}</p> <!-- Filtro default -->
+    <p><strong>Fecha de comienzo:</strong> {{ proyecto.fecha_inicio|date:"d F Y" }}</p> <!-- Filtro date -->
+    <p><strong>Fecha final:</strong> {{ proyecto.fecha_fin|date:"d F Y" }}</p> <!-- Filtro date -->
+    <p><strong>Creador:</strong> {{ proyecto.creador|capfirst }}</p> <!-- Filtro capfirst -->
+    <p><strong>Colaboradores:</strong> 
+        {% include 'Listas/colaborador_list.html' with colaboradores=proyecto.colaboradores.all %}
+    </p>
+</article>

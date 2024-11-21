@@ -1,0 +1,5 @@
+<div class="tarea">
+    <strong>Título:</strong> {{ tarea.titulo|title }}<br> <!-- Filtro title -->
+    <strong>Descripción:</strong> {{ tarea.descripcion|truncatewords:10 }}<br> <!-- Filtro truncatewords -->
+    <strong>Fecha de Creación:</strong> {{ tarea.fecha_creacion|date:"d-m-Y" }}<br> <!-- Filtro date -->
+</div>

@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etiquetas del Proyecto</title>
-</head>
-<body>
+{% extends 'principal.html' %}
 
+{% block cabecera %}
+    <title>Etiquetas del Proyecto</title>
+{% endblock %}
+
+{% block contenido %}
     <header>
         <a href="/">Sistema de Proyectos</a>
     </header>
@@ -17,17 +15,11 @@
         {% if etiquetas %}
             <ul>
                 {% for etiqueta in etiquetas %}
-                <li>{{ etiqueta.nombre }}</li>
+                    {% include 'Listas/etiquetas_por_proyecto_list.html' %}
                 {% endfor %}
             </ul>
         {% else %}
             <p>No hay etiquetas asociadas a las tareas de este proyecto.</p>
         {% endif %}
     </div>
-
-    <footer>
-        &copy; 2024 - Sistema de Proyectos
-    </footer>
-
-</body>
-</html>
+{% endblock %}
